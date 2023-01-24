@@ -1,0 +1,18 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 5rem;
+  align-items: center;
+
+  h2 {
+    margin: 2rem;
+    font-size: 1.2rem;
+  }
+  .articles-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(225px, 1fr));
+    max-width: 1000px;
+    grid-auto-rows: auto;
+    gap: 4rem;
+  }
+}
