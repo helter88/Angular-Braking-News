@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { SharedModule } from './modules/shared/shared.module';
-import { ArticlesContainerComponent } from './components/articles-container/articles-container.component';
+import { ContentContainerComponent } from './components/content-container/content-container.component';
 import { CardComponent } from './components/card/card.component';
 
 @NgModule({
-  declarations: [AppComponent, ArticlesContainerComponent, CardComponent],
+  declarations: [AppComponent, ContentContainerComponent, CardComponent],
   imports: [BrowserModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent],
