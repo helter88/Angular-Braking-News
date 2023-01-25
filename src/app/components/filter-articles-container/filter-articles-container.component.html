@@ -1,7 +1,7 @@
 <div class="container">
   <div class="countrySelect">
-    <label htmlFor="countrySelect">Wybierz kraj:</label>
-    <select id="countrySelect">
+    <label for="countrySelect">Wybierz kraj:</label>
+    <select #country id="countrySelect" (change)="onSelect(country.value)">
       <option value="pl">Polska</option>
       <option value="cz">Czechy</option>
       <option value="de">Niemcy</option>
