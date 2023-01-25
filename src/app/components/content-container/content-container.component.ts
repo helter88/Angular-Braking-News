@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SelectedArticle } from 'src/app/models/article';
 import { ArticlesService } from 'src/app/services/articles.service';
 
 @Component({
@@ -7,11 +8,12 @@ import { ArticlesService } from 'src/app/services/articles.service';
   styleUrls: ['./content-container.component.scss'],
 })
 export class ContentContainerComponent implements OnInit {
+  articles: SelectedArticle[] | undefined;
   constructor(private articleService: ArticlesService) {}
 
   ngOnInit() {
     this.articleService.getArticles().subscribe((res) => {
-      console.log(res);
+      this.articles = res.articles;
     });
   }
 }

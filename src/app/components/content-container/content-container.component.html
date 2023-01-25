@@ -1,8 +1,8 @@
 <div class="content">
   <h2>Wyświetlono [pageSize] najnowszych wiadomości dla kraju: [country]</h2>
   <main class="articles-container">
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
+    <ng-container *ngFor="let article of articles"
+      ><app-card [article]="article"></app-card>
+    </ng-container>
   </main>
 </div>
