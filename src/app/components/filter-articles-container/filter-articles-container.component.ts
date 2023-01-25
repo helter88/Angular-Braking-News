@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-filter-articles-container',
@@ -6,7 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./filter-articles-container.component.scss'],
 })
 export class FilterArticlesContainerComponent {
+  constructor(private localStorage: LocalStorageService) {}
   onSelect(country: string) {
-    console.log(country);
+    this.localStorage.saveData('country', `${country}`);
   }
 }
