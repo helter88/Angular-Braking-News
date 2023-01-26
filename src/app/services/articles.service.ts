@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import {
   Article,
@@ -16,38 +16,37 @@ import { LocalStorageService } from './local-storage.service';
 export class ArticlesService {
   apiUrl = environment.apiUrl;
   apiKey = environment.apiKey;
-  country: string | null = '';
-  pageSize: string | null = '';
 
   constructor(
     private http: HttpClient,
     private locStorage: LocalStorageService
-  ) {
-    this.locStorage.getDataStream('country').subscribe((data) => {
-      if (!data) {
-        this.country = 'pl';
-      } else {
-        this.country = data;
-      }
-    });
-    this.locStorage.getDataStream('itemsOnPage').subscribe((data) => {
-      if (!data) {
-        this.pageSize = '10';
-      } else {
-        this.pageSize = data;
-      }
-    });
-  }
+  ) {}
 
   getArticles(): Observable<SelectedResponse> {
-    const searchParams = new HttpParams()
-      .set('apiKey', `${this.apiKey}`)
-      .set('country', 'pl')
-      .set('pageSize', 10)
-      .set('page', 1);
-    return this.http
-      .get<Root>(this.apiUrl, { params: searchParams })
-      .pipe(map((response: Root) => this.processResponse(response)));
+    // this.locStorage.getDataStream('country').subscribe((data) => {
+    //   console.log('country', data);
+    //   country = data;
+    // });
+
+    // this.locStorage.getDataStream('itemsOnPage').subscribe((data) => {
+    //   console.log('itemsOnPage', data);
+    //   pageSize = data;
+    // });
+
+    const country$ = this.locStorage.getDataStream('country');
+    const pageSize$ = this.locStorage.getDataStream('itemsOnPage');
+
+    return combineLatest([country$, pageSize$]).pipe(
+      switchMap(([country, pageSize]) => {
+        const searchParams = new HttpParams()
+          .set('apiKey', `${this.apiKey}`)
+          .set('country', country)
+          .set('pageSize', pageSize)
+          .set('page', 1);
+        return this.http.get<Root>(this.apiUrl, { params: searchParams });
+      }),
+      map((response: Root) => this.processResponse(response))
+    );
   }
 
   private processResponse(response: Root): SelectedResponse {
