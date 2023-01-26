@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CheckInputPageFormatService } from 'src/app/services/check-input-page-format.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
@@ -7,7 +7,9 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   templateUrl: './filter-articles-container.component.html',
   styleUrls: ['./filter-articles-container.component.scss'],
 })
-export class FilterArticlesContainerComponent {
+export class FilterArticlesContainerComponent implements OnInit {
+  countrySelected: string | undefined;
+
   constructor(
     private localStorage: LocalStorageService,
     private checkInput: CheckInputPageFormatService
@@ -19,5 +21,15 @@ export class FilterArticlesContainerComponent {
     inputPage = this.checkInput.checkFormat(inputPage);
 
     this.localStorage.saveData('itemsOnPage', `${inputPage}`);
+  }
+
+  ngOnInit(): void {
+    this.localStorage.getDataStream('country').subscribe((country) => {
+      if (!country) {
+        this.countrySelected = 'pl';
+      } else {
+        this.countrySelected = country;
+      }
+    });
   }
 }

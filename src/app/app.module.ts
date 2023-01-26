@@ -7,6 +7,7 @@ import { CardComponent } from './components/card/card.component';
 import { FilterArticlesContainerComponent } from './components/filter-articles-container/filter-articles-container.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { BrowserModule } from '@angular/platform-browser';
     CardComponent,
     FilterArticlesContainerComponent,
   ],
-  imports: [BrowserModule, SharedModule, HttpClientModule],
+  imports: [BrowserModule, SharedModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
