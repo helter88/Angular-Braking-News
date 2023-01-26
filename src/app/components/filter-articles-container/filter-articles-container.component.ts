@@ -9,6 +9,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class FilterArticlesContainerComponent implements OnInit {
   countrySelected: string | undefined;
+  valueInput: string | undefined;
 
   constructor(
     private localStorage: LocalStorageService,
@@ -29,6 +30,13 @@ export class FilterArticlesContainerComponent implements OnInit {
         this.countrySelected = 'pl';
       } else {
         this.countrySelected = country;
+      }
+    });
+    this.localStorage.getDataStream('itemsOnPage').subscribe((page) => {
+      if (!page) {
+        this.valueInput = '10';
+      } else {
+        this.valueInput = page;
       }
     });
   }
