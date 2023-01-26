@@ -9,6 +9,12 @@
   </div>
   <div class="pages-filter">
     <p>Zmień ilość wiadomości na stronie:</p>
-    <input type="number" min="0" max="100" />
+    <input
+      type="number"
+      min="0"
+      max="100"
+      #inputPage
+      (change)="onInputChange(inputPage.value)"
+    />
   </div>
 </div>

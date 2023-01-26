@@ -12,7 +12,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class ContentContainerComponent implements OnInit {
   articles: SelectedArticle[] | undefined;
-  country: string | null = 'Poland';
+  country: string | undefined;
   constructor(
     private articleService: ArticlesService,
     private localSorage: LocalStorageService,
@@ -24,10 +24,9 @@ export class ContentContainerComponent implements OnInit {
       this.articles = res.articles;
     });
 
-    this.country = this?.localSorage?.getStaticData('country');
-    this?.localSorage.getDynamicChanges('country').subscribe((countryISO) => {
-      console.log(
-        this.extractCountryName.getLongCountryName(countryISO as CountryISOType)
+    this.localSorage.getDataStream('country').subscribe((countryISO) => {
+      this.country = this.extractCountryName.getLongCountryName(
+        countryISO as CountryISOType
       );
     });
   }
