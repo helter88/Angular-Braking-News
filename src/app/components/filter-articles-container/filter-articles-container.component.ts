@@ -26,18 +26,10 @@ export class FilterArticlesContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.localStorage.getDataStream('country').subscribe((country) => {
-      if (!country) {
-        this.countrySelected = 'pl';
-      } else {
-        this.countrySelected = country;
-      }
+      this.countrySelected = country;
     });
     this.localStorage.getDataStream('itemsOnPage').subscribe((page) => {
-      if (!page) {
-        this.valueInput = '10';
-      } else {
-        this.valueInput = page;
-      }
+      this.valueInput = page;
     });
   }
 }

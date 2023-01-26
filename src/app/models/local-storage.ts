@@ -1,5 +1,5 @@
 export interface LocalStorageData {
-  country: string | null;
-  itemsOnPage: string | null;
-  [key: string]: string | null;
+  country: string;
+  itemsOnPage: string;
+  [key: string]: string;
 }

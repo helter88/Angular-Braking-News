@@ -8,6 +8,7 @@ import {
   SelectedArticle,
   SelectedResponse,
 } from '../models/article';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +16,28 @@ import {
 export class ArticlesService {
   apiUrl = environment.apiUrl;
   apiKey = environment.apiKey;
+  country: string | null = '';
+  pageSize: string | null = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private locStorage: LocalStorageService
+  ) {
+    this.locStorage.getDataStream('country').subscribe((data) => {
+      if (!data) {
+        this.country = 'pl';
+      } else {
+        this.country = data;
+      }
+    });
+    this.locStorage.getDataStream('itemsOnPage').subscribe((data) => {
+      if (!data) {
+        this.pageSize = '10';
+      } else {
+        this.pageSize = data;
+      }
+    });
+  }
 
   getArticles(): Observable<SelectedResponse> {
     const searchParams = new HttpParams()

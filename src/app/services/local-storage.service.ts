@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-
-interface LocalStorageData {
-  country: string | null;
-  itemsOnPage: string | null;
-  [key: string]: string | null;
-}
+import { LocalStorageData } from '../models/local-storage';
 
 const startingVal = {
-  country: localStorage.getItem('country'),
-  itemsOnPage: localStorage.getItem('itemsOnPage'),
+  country: localStorage.getItem('country') ?? 'pl',
+  itemsOnPage: localStorage.getItem('itemsOnPage') ?? '10',
 };
 
 @Injectable({
