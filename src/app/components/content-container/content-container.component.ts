@@ -13,7 +13,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class ContentContainerComponent implements OnInit {
   articles: SelectedArticle[] | undefined;
   country: string | undefined;
-  pageSize: string | undefined;
+  pageSize: number | undefined;
   constructor(
     private articleService: ArticlesService,
     private localSorage: LocalStorageService,
@@ -23,16 +23,13 @@ export class ContentContainerComponent implements OnInit {
   ngOnInit() {
     this?.articleService?.getArticles()?.subscribe((res) => {
       this.articles = res.articles;
+      this.pageSize = res.totalResults;
     });
 
     this?.localSorage?.getDataStream('country')?.subscribe((countryISO) => {
       this.country = this?.extractCountryName.getLongCountryName(
         countryISO as CountryISOType
       );
-    });
-
-    this?.localSorage?.getDataStream('itemsOnPage')?.subscribe((numItems) => {
-      this.pageSize = numItems;
     });
   }
 }
