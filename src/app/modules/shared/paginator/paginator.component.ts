@@ -15,7 +15,13 @@ export class PaginatorComponent implements OnInit {
     this.servicePage.nextPage();
   }
 
+  handlePrevPage() {
+    this.servicePage.prevPage();
+  }
+
   ngOnInit(): void {
-    this.currPage = this.servicePage.getCurrPage();
+    this.servicePage.getCurrPage().subscribe((val) => {
+      this.currPage = val;
+    });
   }
 }
