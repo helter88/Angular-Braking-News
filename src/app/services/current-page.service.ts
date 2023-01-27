@@ -10,9 +10,8 @@ import { LocalStorageService } from './local-storage.service';
 export class CurrentPageService {
   private currentPage: number = 1;
   private currentPageSub = new BehaviorSubject<number>(this.currentPage);
-  private totalFromAPI: number | undefined;
-  private pagesOnSite: number | undefined;
-
+  private totalFromAPI: number = 0;
+  private pagesOnSite: number = 1;
   constructor(
     private articles: ArticlesService,
     private locStorage: LocalStorageService
@@ -34,14 +33,21 @@ export class CurrentPageService {
   }
 
   nextPage(): void {
-    console.log('totalFromAPI', this.totalFromAPI);
-    console.log('pages', this.pagesOnSite);
-    this.currentPage++;
-    this.currentPageSub.next(this.currentPage);
+    console.log('total from API', this.totalFromAPI);
+    if (this.pagesOnSite * this.currentPage >= this.totalFromAPI) {
+      return;
+    } else {
+      this.currentPage++;
+      this.currentPageSub.next(this.currentPage);
+    }
   }
 
   prevPage(): void {
-    this.currentPage--;
-    this.currentPageSub.next(this.currentPage);
+    if (this.currentPage === 1) {
+      return;
+    } else {
+      this.currentPage--;
+      this.currentPageSub.next(this.currentPage);
+    }
   }
 }
