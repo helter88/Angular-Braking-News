@@ -8,6 +8,8 @@ import {
   SelectedArticle,
   SelectedResponse,
 } from '../models/article';
+import { CurrentPageService } from './current-page.service';
+
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
@@ -19,20 +21,22 @@ export class ArticlesService {
 
   constructor(
     private http: HttpClient,
-    private locStorage: LocalStorageService
+    private locStorage: LocalStorageService,
+    private currPage: CurrentPageService
   ) {}
 
   getArticles(): Observable<SelectedResponse> {
     const country$ = this.locStorage.getDataStream('country');
     const pageSize$ = this.locStorage.getDataStream('itemsOnPage');
+    const currPage$ = this.currPage.getCurrPage();
 
-    return combineLatest([country$, pageSize$]).pipe(
-      switchMap(([country, pageSize]) => {
+    return combineLatest([country$, pageSize$, currPage$]).pipe(
+      switchMap(([country, pageSize, currPage]) => {
         const searchParams = new HttpParams()
           .set('apiKey', `${this.apiKey}`)
           .set('country', country)
           .set('pageSize', pageSize)
-          .set('page', 1);
+          .set('page', currPage);
         return this.http.get<Root>(this.apiUrl, { params: searchParams });
       }),
       map((response: Root) => this.processResponse(response))
