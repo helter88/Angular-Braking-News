@@ -17,6 +17,13 @@
     &:hover {
       cursor: pointer;
     }
+    &.prevPage.unvisible {
+      visibility: hidden;
+    }
+    &.nextPage.unvisible {
+      background-color: red;
+      visibility: hidden;
+    }
   }
   .currentPage {
     margin: 0 1.5rem;

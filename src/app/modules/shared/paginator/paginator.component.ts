@@ -27,10 +27,10 @@ export class PaginatorComponent implements OnInit {
     });
 
     this.servicePage.getIsMaxPage().subscribe((val) => {
-      console.log('isPageMax?', val);
+      this.isMaxPage = val;
     });
     this.servicePage.getIsMinPage().subscribe((val) => {
-      console.log('isPageMin?', val);
+      this.isMinPage = val;
     });
   }
 }

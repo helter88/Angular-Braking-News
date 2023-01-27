@@ -1,7 +1,19 @@
 <div class="paginator">
   <div class="paginatorBox">
-    <button class="prevPage" (click)="handlePrevPage()">Poprzednia</button>
+    <button
+      class="prevPage"
+      [ngClass]="{ unvisible: isMinPage }"
+      (click)="handlePrevPage()"
+    >
+      Poprzednia
+    </button>
     <span class="currentPage">{{ currPage }}</span>
-    <button class="nextPage" (click)="handleNextPage()">Następna</button>
+    <button
+      class="nextPage"
+      [ngClass]="{ unvisible: isMaxPage }"
+      (click)="handleNextPage()"
+    >
+      Następna
+    </button>
   </div>
 </div>
