@@ -1,7 +1,7 @@
 <div class="paginator">
   <div class="paginatorBox">
     <button class="prevPage">Poprzednia</button>
-    <span class="currentPage">1</span>
-    <button class="nextPage">Następna</button>
+    <span class="currentPage">{{ currPage }}</span>
+    <button class="nextPage" (click)="(handleNextPage)">Następna</button>
   </div>
 </div>
