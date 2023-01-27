@@ -18,12 +18,16 @@ export class CurrentPageService {
 
   nextPage(): void {
     ++this.currentPage;
-    console.log('nextPage service currPage: ', this.currentPage);
     this.currentPageSub.next(this.currentPage);
   }
 
   prevPage(): void {
     --this.currentPage;
+    this.currentPageSub.next(this.currentPage);
+  }
+
+  resetPage(): void {
+    this.currentPage = 1;
     this.currentPageSub.next(this.currentPage);
   }
 }

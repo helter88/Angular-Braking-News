@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckInputPageFormatService } from 'src/app/services/check-input-page-format.service';
+import { CurrentPageService } from 'src/app/services/current-page.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -13,15 +14,18 @@ export class FilterArticlesContainerComponent implements OnInit {
 
   constructor(
     private localStorage: LocalStorageService,
-    private checkInput: CheckInputPageFormatService
+    private checkInput: CheckInputPageFormatService,
+    private currPage: CurrentPageService
   ) {}
   onSelect(country: string) {
     this.localStorage.saveData('country', `${country}`);
+    this.currPage.resetPage();
   }
   onInputChange(inputPage: string) {
     inputPage = this.checkInput.checkFormat(inputPage);
 
     this.localStorage.saveData('itemsOnPage', `${inputPage}`);
+    this.currPage.resetPage();
   }
 
   ngOnInit(): void {

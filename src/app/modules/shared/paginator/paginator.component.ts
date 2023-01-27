@@ -9,7 +9,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   styleUrls: ['./paginator.component.scss'],
 })
 export class PaginatorComponent implements OnInit {
-  currPage: number = 0;
+  currPage: number = 1;
   isMaxPage: boolean = false;
   isMinPage: boolean = true;
   totalNumArticles: number = 0;
@@ -47,6 +47,10 @@ export class PaginatorComponent implements OnInit {
 
   ngOnInit(): void {
     this.servicePage.getCurrPage().subscribe((val) => {
+      if (val === 1) {
+        this.isMaxPage = false;
+        this.isMinPage = true;
+      }
       this.currPage = val;
     });
     this.articlesServ.getArticles().subscribe((resp) => {
