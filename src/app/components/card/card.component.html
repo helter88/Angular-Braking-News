@@ -5,9 +5,9 @@
   <ng-template [ngIf]="article">
     <p class="shortcut">
       {{
-        article!.description!.length > 60
-          ? article!.description!.slice(0, 60) + "..."
-          : article!.description
+        article && article.description && article.description.length > 60
+          ? article.description.slice(0, 60) + "..."
+          : article.description
       }}
     </p>
   </ng-template>

@@ -16,9 +16,8 @@ export class LocalStorageService {
 
   saveData(key: string, value: string) {
     localStorage.setItem(key, value);
-    const currData = this.dataSubject.getValue();
     this.dataSubject.next({
-      ...currData,
+      ...this.dataSubject.getValue(),
       [key]: value,
     });
   }

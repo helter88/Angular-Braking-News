@@ -21,22 +21,18 @@ export class ContentContainerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.articleService.getArticles().subscribe((res) => {
+    this?.articleService?.getArticles()?.subscribe((res) => {
       this.articles = res.articles;
     });
 
-    this.localSorage.getDataStream('country').subscribe((countryISO) => {
-      this.country = this.extractCountryName.getLongCountryName(
+    this?.localSorage?.getDataStream('country')?.subscribe((countryISO) => {
+      this.country = this?.extractCountryName.getLongCountryName(
         countryISO as CountryISOType
       );
     });
 
-    this.localSorage.getDataStream('itemsOnPage').subscribe((numItems) => {
-      if (!numItems) {
-        this.pageSize = '10';
-      } else {
-        this.pageSize = numItems;
-      }
+    this?.localSorage?.getDataStream('itemsOnPage')?.subscribe((numItems) => {
+      this.pageSize = numItems;
     });
   }
 }
