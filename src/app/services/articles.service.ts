@@ -14,8 +14,8 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class ArticlesService {
-  apiUrl = environment.apiUrl;
-  apiKey = environment.apiKey;
+  private readonly apiUrl = environment.apiUrl;
+  private readonly apiKey = environment.apiKey;
 
   constructor(
     private http: HttpClient,
@@ -23,16 +23,6 @@ export class ArticlesService {
   ) {}
 
   getArticles(): Observable<SelectedResponse> {
-    // this.locStorage.getDataStream('country').subscribe((data) => {
-    //   console.log('country', data);
-    //   country = data;
-    // });
-
-    // this.locStorage.getDataStream('itemsOnPage').subscribe((data) => {
-    //   console.log('itemsOnPage', data);
-    //   pageSize = data;
-    // });
-
     const country$ = this.locStorage.getDataStream('country');
     const pageSize$ = this.locStorage.getDataStream('itemsOnPage');
 
