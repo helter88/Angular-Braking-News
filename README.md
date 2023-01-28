@@ -3,7 +3,7 @@
 <img src="./readme_images/breaking-news-main.png" alt="project image">
 > This applicattion is an information platform
 
-> See demo live : [click here]( 'click to open link')
+> API Requests from the browser are not allowed on the Developer plan, except from localhost so check app you have to run it localy on your computer.
 
 ## Description
 
@@ -22,6 +22,10 @@ News should be presented in two columns, in a card format which contain:
 
 Each card should contain a link to the news, which will open in a new window after clicking it.
 The aplication written in Polish. Styling should be done in SCSS without without UI ready-made frameworksl .
+
+## How to run app
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Features
 

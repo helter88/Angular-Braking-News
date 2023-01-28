@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { combineLatest, map, Observable, switchMap } from 'rxjs';
-import { data } from 'src/data/data';
+import { environment } from 'src/environments/environment';
 import {
   Article,
   Root,
@@ -16,8 +16,8 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class ArticlesService {
-  private readonly apiUrl = data.apiUrl;
-  private readonly apiKey = data.apiKey;
+  private readonly apiUrl = environment.apiUrl;
+  private readonly apiKey = environment.apiKey;
 
   constructor(
     private http: HttpClient,
