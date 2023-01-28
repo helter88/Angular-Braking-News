@@ -26,12 +26,11 @@ The aplication written in Polish. Styling should be done in SCSS without without
 ## Features
 
 - Page with articles list
-
-* Country filter to choose articles from Poland, Czech Republic and Germany
-* Articles per site filter
-* Saving chosen filters data in Local Storage
-* Clickable article card
-* Paginator to choose next or previous articles list
+- Country filter to choose articles from Poland, Czech Republic and Germany
+- Articles per site filter
+- Saving chosen filters data in Local Storage
+- Clickable article card
+- Paginator to choose next or previous articles list
 
 ## Built using
 
